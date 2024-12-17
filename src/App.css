@@ -10,6 +10,17 @@ body {
   min-height: 90vh;
   min-width: 100vw;
   background-color: #f8f9fa;
+  gap: 30px
+}
+
+.action-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+
+.action-container .btn-success {
+  margin: 0 15px; 
 }
 
 .app-header {
@@ -71,6 +82,7 @@ table th {
   color: white;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 5px
 }
 
 .btn-success:hover {

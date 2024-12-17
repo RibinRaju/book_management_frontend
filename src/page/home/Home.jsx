@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState("asc");
   const navigate = useNavigate();
   const booksPerPage = 10;
 
@@ -12,7 +13,7 @@ export default function Home() {
       try {
         const response = await fetch("https://bookmanagementbackend-production.up.railway.app/api/books");
         const data = await response.json();
-        // Sort books by title in ascending order (A-Z)
+        // Initial sorting in ascending order
         const sortedBooks = data.sort((a, b) => a.title.localeCompare(b.title));
         setBooks(sortedBooks);
       } catch (error) {
@@ -33,6 +34,16 @@ export default function Home() {
     }
   };
 
+  const handleSortBooks = (order) => {
+    const sortedBooks = [...books].sort((a, b) => 
+      order === "asc" 
+        ? a.title.localeCompare(b.title) 
+        : b.title.localeCompare(a.title)
+    );
+    setBooks(sortedBooks);
+    setSortOrder(order);
+  };
+
   // Pagination
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -46,6 +57,9 @@ export default function Home() {
     <>
       <div className="book-list-container">
         <h2 className="text-center">Book List</h2>
+        
+        
+
         <table className="table table-striped">
           <thead>
             <tr>
@@ -121,10 +135,17 @@ export default function Home() {
       </div>
 
       <div className="action-container">
-        <Link to="/add-or-edit" className="btn-success">
-          Add New Book
-        </Link>
-      </div>
+          <Link to="/add-or-edit" className="btn-success">
+             Add New Book
+          </Link>
+          <button className="btn-success" onClick={() => handleSortBooks("asc")}>
+            Asc by Title
+          </button>
+          <button className="btn-success" onClick={() => handleSortBooks("desc")}>
+            Desc by Title
+          </button>
+        </div>
+
     </>
   );
 }
