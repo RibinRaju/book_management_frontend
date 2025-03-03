@@ -1,27 +1,26 @@
 import { Route, Routes } from "react-router-dom";
-import BookForm from "./page/add-or-edit/BookForm";
-import "./App.css";
-import BookDetails from "./page/details/BookDetails";
 import Home from "./page/home/Home";
+import Balance from "./page/balance/balance"; 
+import Deposit from "./page/deposit/deposit";
+import Withdraw from "./page/withdraw/withdraw";
+import "./App.css";
 
 const App = () => {
     return (
         <div className="app-container">
             <header className="app-header">
-                <h1>Book Management System</h1>
+                <h1>ATM System</h1>
             </header>
             <main className="app-main">
                 <Routes>
-                    <Route
-                        path="/"
-                        element={<Home />} />
-                    <Route path="/add-or-edit" element={<BookForm />} />
-                    <Route path="/add-or-edit/:id" element={<BookForm />} />
-                    <Route path="/details/:id" element={<BookDetails />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/withdraw" element={<Withdraw />} />
+                    <Route path="/deposit" element={<Deposit />} />
+                    <Route path="/balance" element={<Balance />} />  
                 </Routes>
             </main>
             <footer className="app-footer">
-                <p>© 2024 Book Management System</p>
+                <p>© 2024 ATM System</p>
             </footer>
         </div>
     );
